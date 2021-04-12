@@ -1,0 +1,9 @@
+import axios from 'axios'
+// 请求模块
+const request = axios.create({
+  // 根路径
+  baseURL: 'http://ttapi.research.itcast.cn/'
+})
+// 请求拦截器
+// 响应拦截器
+export default request

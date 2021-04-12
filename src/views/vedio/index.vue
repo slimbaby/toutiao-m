@@ -1,12 +1,11 @@
 <template>
-<div id="app">
- <router-view></router-view>
+<div>
+    vedio
 </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
   components: {},
   props: {},
   data () {
