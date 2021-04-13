@@ -4,8 +4,8 @@
     <div class="header login" v-if="user">
       <div class="top">
         <div class="left">
-          <van-image round src="https://img01.yzcdn.cn/vant/cat.jpeg" />
-          <span>用户名</span>
+          <van-image round :src='userInfo.photo' />
+          <span>{{userInfo.name}}</span>
         </div>
         <div class="right">
           <van-button type="default" size="mini" round>编辑资料</van-button>
@@ -13,19 +13,19 @@
       </div>
       <div class="bottom">
         <div class="item">
-          <span>0</span>
+          <span>{{userInfo.art_count}}</span>
           <span>头条</span>
         </div>
         <div class="item">
-          <span>0</span>
+          <span>{{userInfo.follow_count}}</span>
           <span>关注</span>
         </div>
         <div class="item">
-          <span>0</span>
+          <span>{{userInfo.fans_count}}</span>
           <span>粉丝</span>
         </div>
         <div class="item">
-          <span>0</span>
+          <span>{{userInfo.like_count}}</span>
           <span>获赞</span>
         </div>
       </div>
@@ -55,24 +55,42 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getUserInfo } from '@/api/user'
 export default {
   components: {},
   props: {},
   data () {
-    return {}
+    return {
+      userInfo: {}
+    }
   },
   computed: {
     ...mapState(['user'])
   },
   watch: {},
-  created () {},
+  created () {
+    if (this.user) {
+      this.getUserInfo()
+    }
+  },
   mounted () {},
   methods: {
+    // 获取用户信息
+    async getUserInfo () {
+      try {
+        const { data: res } = await getUserInfo()
+        this.userInfo = res.data
+        console.log(this.userInfo)
+      } catch (err) {
+        console.log(err)
+      }
+    },
     // 退出按钮点击事件
     logout () {
-      this.$dialog.confirm({
-        title: '确认退出？'
-      })
+      this.$dialog
+        .confirm({
+          title: '确认退出？'
+        })
         .then(() => {
           this.$store.commit('setUserToken', null)
           // on confirm
