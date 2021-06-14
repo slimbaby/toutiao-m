@@ -14,6 +14,10 @@
           <i class="toutiao toutiao-gengduo"></i>
         </div>
         <div class="more1"></div>
+          <div class="more">
+          <i class="toutiao toutiao-gengduo"></i>
+        </div>
+        <div class="more1"></div>
       </template>
     </van-tabs>
   </div>
